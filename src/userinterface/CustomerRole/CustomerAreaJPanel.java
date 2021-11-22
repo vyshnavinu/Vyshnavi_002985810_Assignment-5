@@ -8,16 +8,16 @@ import Business.EcoSystem;
 import Business.Customer.Customer;
 import Business.Order.Order;
 import Business.Restaurant.Restaurant;
-
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Sri Vyshnavi
+ * @author srivyshnavi
  */
 public class CustomerAreaJPanel extends javax.swing.JPanel {
 
@@ -68,7 +68,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 Object[] row = new Object[4];
                 row[0] = menu;
                 row[1] = menu.getRestaurantName();
-               
                 row[2] = menu.getCost();
                 row[3] = menu.getStatus();
                 model.addRow(row);
@@ -137,6 +136,11 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         valueLabel.setText("<value>");
 
         btnOrderFood.setText("Order Food");
+        btnOrderFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderFoodActionPerformed(evt);
+            }
+        });
 
         lblQuantity.setText("Quantity:");
 
@@ -186,6 +190,22 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(217, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOrderFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderFoodActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = restaurantTable.getSelectedRow();
+        if(selectedRow<0){
+            JOptionPane.showMessageDialog(null,"Please select a row from the table to view details","Warning",JOptionPane.WARNING_MESSAGE);
+        }
+        else{
+           Restaurant restaurant = (Restaurant)restaurantTable.getValueAt(selectedRow, 0);
+            
+            MenuPanel manageMenu=new MenuPanel(userProcessContainer,account,system,restaurant);
+            userProcessContainer.add("Manage Restaurants",manageMenu);
+            CardLayout CrdLyt=(CardLayout)userProcessContainer.getLayout();
+            CrdLyt.next(userProcessContainer);
+        }
+    }//GEN-LAST:event_btnOrderFoodActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxQuantityCount;
