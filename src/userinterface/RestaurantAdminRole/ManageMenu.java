@@ -80,7 +80,7 @@ public class ManageMenu extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel1.setText("Description");
 

@@ -62,7 +62,7 @@ public class ManageInformation extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setText("Restaurant Name");
 

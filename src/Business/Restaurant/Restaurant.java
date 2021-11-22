@@ -112,9 +112,4 @@ public class Restaurant {
     public String toString() {
         return name;
     }
-
-    public Object getQuantity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

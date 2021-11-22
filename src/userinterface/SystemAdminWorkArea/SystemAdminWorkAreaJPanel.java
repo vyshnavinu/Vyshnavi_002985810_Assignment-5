@@ -84,6 +84,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+
         jLabel1.setText("Selected Node:");
 
         lblSelectedNode.setText("<View_selected_node>");

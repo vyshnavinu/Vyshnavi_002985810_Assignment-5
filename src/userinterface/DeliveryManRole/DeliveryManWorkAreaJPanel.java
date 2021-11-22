@@ -74,33 +74,13 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
-        assignJButton = new javax.swing.JButton();
         processJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        workRequestJTable = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(204, 204, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane1.setViewportView(workRequestJTable);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 530, 96));
-
-        assignJButton.setText("Assign to me");
-        assignJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButtonActionPerformed(evt);
-            }
-        });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +88,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 215, -1, -1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,23 +96,37 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 210, -1, -1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, -1, -1));
+
+        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Order Id", "Restaurant Name", "Customer Name", "Delivery Address", "Amount", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(workRequestJTable);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 670, 120));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
-
-        int selectedRow = workRequestJTable.getSelectedRow();
-        
-        if (selectedRow < 0){
-            return;
-        }
-        
-        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
-        request.setReceiver(userAccount);
-        request.setStatus("Pending");
-        populateTable();
-        
-    }//GEN-LAST:event_assignJButtonActionPerformed
 
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
         
@@ -159,8 +153,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton processJButton;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;

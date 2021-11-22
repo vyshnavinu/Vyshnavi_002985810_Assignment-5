@@ -67,7 +67,7 @@ private void populateNetworkTable() {
         lblDelivery = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 153, 153));
+        setBackground(new java.awt.Color(204, 204, 255));
 
         DeliveryManJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
