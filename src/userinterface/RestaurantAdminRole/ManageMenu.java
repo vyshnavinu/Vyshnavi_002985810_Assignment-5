@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Deepika Reddy
+ * @author srivyshnavi
  */
 public class ManageMenu extends javax.swing.JPanel {
 
@@ -28,34 +28,32 @@ public class ManageMenu extends javax.swing.JPanel {
     Menu menu;
     JPanel userProcessContainer;
     UserAccount account;
-   
-    public ManageMenu(JPanel userProcessContainer,UserAccount account, EcoSystem system) {
+
+    public ManageMenu(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
         initComponents();
-        this.account=account;
-        this.system=system;
-        this.userProcessContainer=userProcessContainer;
+        this.account = account;
+        this.system = system;
+        this.userProcessContainer = userProcessContainer;
         populateTable();
     }
+
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) MenuTable.getModel();
-        
         model.setRowCount(0);
-        
-       
-        for (Restaurant restro:system.getRestaurantDirectory().getRestaurantList()) {
-           
-            if (restro.getAdminUName().equals(account.getUsername())) {
-                
-               for(Menu menu:restro.getMenu()){
-                Object[] row = new Object[3];
-                row[0] = menu.getName();
-                row[1] = menu.getDescription();
-                row[2] = menu.getPrice();
-                model.addRow(row);
-               }
-                
+        for (Restaurant rest : system.getRestaurantDirectory().getRestaurantList()) {
+            if (rest.getAdminUName().equals(account.getUsername())) {
+                    
+                if(rest.getMenu() != null) {
+                for (Menu m : rest.getMenu()) {
+                    Object[] row = new Object[3];
+                    row[0] = m.getName();
+                    row[1] = m.getDescription();
+                    row[2] = m.getPrice();
+                    model.addRow(row);
+                }
+                }
+
             }
-            
         }
     }
 
@@ -84,7 +82,7 @@ public class ManageMenu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel1.setText("Ingredients");
+        jLabel1.setText("Description");
 
         amtTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +98,7 @@ public class ManageMenu extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Dish Name", "Ingredients", "Prize"
+                "Dish Name", "Description", "Price"
             }
         ) {
             Class[] types = new Class [] {
@@ -194,11 +192,11 @@ public class ManageMenu extends javax.swing.JPanel {
                         .addGap(227, 227, 227)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(233, 233, 233)
-                        .addComponent(addDishBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addDishBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -228,9 +226,9 @@ public class ManageMenu extends javax.swing.JPanel {
                     .addComponent(amtTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(addDishBtn)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteBtn)
                 .addContainerGap(95, Short.MAX_VALUE))
         );
@@ -251,19 +249,19 @@ public class ManageMenu extends javax.swing.JPanel {
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = MenuTable.getSelectedRow();
-        if(selectedRow>=0){
+        if (selectedRow >= 0) {
             int selectionButton = JOptionPane.YES_NO_OPTION;
-            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??","Warning",selectionButton);
-            if(selectionResult == JOptionPane.YES_OPTION){
+            int selectionResult = JOptionPane.showConfirmDialog(null, "Are you sure to delete??", "Warning", selectionButton);
+            if (selectionResult == JOptionPane.YES_OPTION) {
 
-                for(Restaurant restro:system.getRestaurantDirectory().getRestaurantList()){
-                    if(restro.getAdminUName().equals(account.getUsername())){
+                for (Restaurant restro : system.getRestaurantDirectory().getRestaurantList()) {
+                    if (restro.getAdminUName().equals(account.getUsername())) {
                         system.getRestaurantDirectory().DeleteDishes(restro, menu);
                     }
                 }
                 populateTable();
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Please select a Row!!");
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
@@ -277,43 +275,43 @@ public class ManageMenu extends javax.swing.JPanel {
 
     private void addDishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDishBtnActionPerformed
         // TODO add your handling code here:
-        String name=dishNameTxt.getText();
-        String desc=descTxt.getText();
-        String amount=amtTxt.getText();
+        String name = dishNameTxt.getText();
+        String desc = descTxt.getText();
+        String amount = amtTxt.getText();
 
         try {
-            if(name==null || name.isEmpty()){
+            if (name == null || name.isEmpty()) {
                 throw new NullPointerException(" Name field is Empty");
 
-            }else if(name.length()<5 ){
+            } else if (name.length() < 5) {
                 throw new Exception("Please enter valid  Name");
 
             }
-        } catch(NullPointerException e){
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, " Name is Empty");
 
             return;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "  Name is invalid");
 
             return;
         }
 
         try {
-            if(desc==null || desc.isEmpty()){
+            if (desc == null || desc.isEmpty()) {
                 throw new NullPointerException("Description  field is Empty");
 
-            }else if(desc.length()<5){
+            } else if (desc.length() < 5) {
                 throw new Exception("Please enter valid Description ");
 
             }
-        } catch(NullPointerException e){
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Description is Empty");
 
             return;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, " Description is invalid");
 
             return;
@@ -321,33 +319,33 @@ public class ManageMenu extends javax.swing.JPanel {
 
         try {
 
-            if(amount==null || amount.isEmpty()){
+            if (amount == null || amount.isEmpty()) {
                 throw new NullPointerException("amount field is Empty");
-            }else if(Pattern.matches("^[0-9]{0,3}$", amount)==false){
+            } else if (Pattern.matches("^[0-9]{0,3}$", amount) == false) {
                 throw new Exception("Invalid amount (Enter 0-3 Digits)");
             }
 
-        }  catch(NullPointerException e){
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "amount is Empty");
 
             return;
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "amount is of invalid pattern");
 
             return;
         }
 
-        for(Restaurant restro:system.getRestaurantDirectory().getRestaurantList()){
-            if(restro.getAdminUName().equals(account.getUsername())){
-                menu=system.getRestaurantDirectory().AddMenuDishes(restro,name, desc, amount);
+        for (Restaurant rest : system.getRestaurantDirectory().getRestaurantList()) {
+            if (rest.getAdminUName().equals(account.getUsername())) {
+                //Menu menu=new Menu(name, desc, amount);
+                //system.getRestaurantDirectory();
+                menu = system.getRestaurantDirectory().AddMenuDishes(rest, name, desc, amount);
             }
         }
-
+        populateTable();
         dishNameTxt.setText("");
         descTxt.setText("");
         amtTxt.setText("");
-        populateTable();
-
     }//GEN-LAST:event_addDishBtnActionPerformed
 
 

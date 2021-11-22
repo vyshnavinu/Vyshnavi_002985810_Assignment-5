@@ -14,12 +14,11 @@ import java.util.ArrayList;
  * @author harold
  */
 public class Restaurant {
+
     private String adminUName;
-    private Image picture;
-    private ArrayList<Menu> menu;
+    private ArrayList<Menu> Menu;
     private ArrayList<Order> orderList;
-    
-    int id=101;
+    int id = 101;
 
     public ArrayList<Order> getOrderList() {
         return orderList;
@@ -28,9 +27,9 @@ public class Restaurant {
     public void setOrderList(ArrayList<Order> orderList) {
         this.orderList = orderList;
     }
-    
+
     public void addOrder(String restaurentName, String customerName, String deliverMan, ArrayList<Menu> Order, String cost, String deliveryAddress) {
-        Order order=new Order();
+        Order order = new Order();
         order.setOrderID(String.valueOf(id));
         order.setCustomerName(customerName);
         order.setRestaurantName(restaurentName);
@@ -42,33 +41,45 @@ public class Restaurant {
         orderList.add(order);
         id++;
     }
+
     public ArrayList<Menu> getMenu() {
-        return menu;
+        return Menu;
     }
     
-    public void addDishes(Menu menu){
-        //menu.add(menu);
+     public void setMenu(ArrayList<Menu> Menu) {
+        this.Menu = Menu;
     }
-    
-    public void removeDishes(Menu menu){
-        
-        //menu.remove(menu);
+
+    public void addDishes(Menu menu) {
+        Menu.add(menu);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void removeDishes(Menu menu) {
+        Menu.remove(menu);
     }
 
     public String getAdminUName() {
         return adminUName;
     }
-    
+
     public void setAdminUName(String adminUName) {
         this.adminUName = adminUName;
     }
 
     public Restaurant(String UName) {
-        this.adminUName=UName;
-        menu=new ArrayList<Menu>();
-        orderList=new ArrayList<Order>();
+        this.adminUName = UName;
+        Menu = new ArrayList<Menu>();
+        orderList = new ArrayList<Order>();
     }
-  
+
     private String name;
     private String address;
     private String number;
@@ -88,7 +99,6 @@ public class Restaurant {
     public void setNumber(String number) {
         this.number = number;
     }
-   
 
     public String getName() {
         return name;
@@ -97,14 +107,7 @@ public class Restaurant {
     public void setName(String name) {
         this.name = name;
     }
-    public Image getPicture() {
-        return picture;
-    }
 
-    public void setPicture(Image picture) {
-        this.picture = picture;
-    }
-    
     @Override
     public String toString() {
         return name;
@@ -113,4 +116,5 @@ public class Restaurant {
     public Object getQuantity() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

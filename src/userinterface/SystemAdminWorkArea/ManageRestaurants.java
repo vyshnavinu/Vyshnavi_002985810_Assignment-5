@@ -243,7 +243,7 @@ public class ManageRestaurants extends javax.swing.JPanel {
             if(name==null || name.isEmpty()){
                 throw new NullPointerException(" Name field is Empty");
 
-            }else if(name.length()<5 || Pattern.matches("^[A-Za-z]+$", name)==false){
+            }else if(name.length()< 3 || Pattern.matches("^[A-Za-z]+$", name)==false){
                 throw new Exception("Please enter valid  Name");
 
             }

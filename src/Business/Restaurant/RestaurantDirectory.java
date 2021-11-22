@@ -12,26 +12,9 @@ import java.util.ArrayList;
  * @author harold
  */
 public class RestaurantDirectory {
-    private ArrayList<Restaurant> restaurantList;
+   private ArrayList<Restaurant> restaurantList;
     private Restaurant restaurant;
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
     private Menu menu;
-    
     public RestaurantDirectory(){
         this.restaurantList=new ArrayList<Restaurant>();
     }
@@ -59,19 +42,28 @@ public class RestaurantDirectory {
         }
     }
     
-    public void updateRestaurantInfo(Restaurant rest, String name, String number, String address){
-        rest.setName(name);
-        rest.setAddress(address);
-        rest.setNumber(number);
+    public void updateRestaurantInfo(Restaurant restro,String name,String number,String address){
+        restro.setName(name);
+        restro.setAddress(address);
+        restro.setNumber(number);
     }
     
-    public Menu AddMenuDishes(Restaurant rest, String name, String desc, String amount){
-        menu = new Menu(name, desc, amount);
-        rest.addDishes(menu);
+    public Menu AddMenuDishes(Restaurant rest,String name,String desc,String amount){
+        menu=new Menu(name, desc, amount);
+        if(rest.getMenu() == null) {
+            ArrayList<Menu> menuList = new ArrayList();
+            menuList.add(menu);
+            rest.setMenu(menuList);
+        } else {
+        rest.getMenu().add(menu);
+        }
+        //restro.addDishes(menu);
+        System.out.println("List size" + rest.getMenu().size());
         return menu;
     }
     
-    public void DeleteDishes(Restaurant rest, Menu menu){
-        rest.removeDishes(menu);  
+    public void DeleteDishes(Restaurant restro, Menu menu){
+        restro.removeDishes(menu);
+        
     }
 }

@@ -19,24 +19,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               <Component id="submitJButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnUpload" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="60" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="backJButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="picture" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="picturelabel" min="-2" pref="103" max="-2" attributes="0"/>
-                  <Component id="resultJTextField" min="-2" pref="88" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Component id="resultJTextField" min="-2" pref="88" max="-2" attributes="0"/>
+              <EmptySpace pref="192" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,16 +40,10 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="resultJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="picture" min="-2" max="-2" attributes="0"/>
-                  <Component id="picturelabel" min="-2" pref="89" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="150" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="submitJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="backJButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnUpload" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
           </Group>
@@ -87,21 +73,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backJButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnUpload">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Upload"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUploadActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="picturelabel">
-    </Component>
-    <Component class="javax.swing.JLabel" name="picture">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Picture"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

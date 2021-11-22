@@ -14,21 +14,14 @@ import java.awt.Image;
 public class Menu {
     private String name;
     private String price;
-    private Image picture;
     private String description;
 
-    public Menu(String name, String price, Image picture, String description) {
-        this.name = name;
-        this.price = price;
-        this.picture = picture;
-        this.description = description;
+    public Menu(String name,String description,String price ) {
+        this.name=name;
+        this.price=price;
+        this.description=description;
     }
 
-    Menu(String name, String desc, String amount) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     public String getName() {
         return name;
     }
