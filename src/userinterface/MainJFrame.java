@@ -50,6 +50,7 @@ public class MainJFrame extends javax.swing.JFrame {
         loginJLabel = new javax.swing.JLabel();
         logoutJButton = new javax.swing.JButton();
         container = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.BorderLayout());
@@ -109,13 +110,21 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(logoutJButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(loginJLabel)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(617, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         container.setBackground(new java.awt.Color(204, 204, 255));
         container.setLayout(new java.awt.CardLayout());
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/foodbg.jpeg"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        jLabel4.setAlignmentX(0.5F);
+        jLabel4.setAutoscrolls(true);
+        jLabel4.setBounds(new java.awt.Rectangle(10, 0, 0, 0));
+        container.add(jLabel4, "card2");
+
         jSplitPane1.setRightComponent(container);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
@@ -196,6 +205,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel container;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton loginJButton;
