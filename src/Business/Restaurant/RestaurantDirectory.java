@@ -14,6 +14,22 @@ import java.util.ArrayList;
 public class RestaurantDirectory {
     private ArrayList<Restaurant> restaurantList;
     private Restaurant restaurant;
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
     private Menu menu;
     
     public RestaurantDirectory(){

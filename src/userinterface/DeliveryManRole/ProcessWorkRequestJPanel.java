@@ -4,8 +4,22 @@
  */
 package userinterface.DeliveryManRole;
 
+import Business.Customer.Customer;
+import Business.DeliveryMan.DeliveryMan;
+import Business.EcoSystem;
+import Business.Order.Order;
+import Business.Restaurant.Restaurant;
+import Business.WorkQueue.LabTestWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -17,12 +31,25 @@ import javax.swing.JPanel;
 public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
+    LabTestWorkRequest request;
+    Order order;
+    EcoSystem system;
+    Restaurant rest;
+    
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer) {
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, LabTestWorkRequest request) {
         initComponents();
-        
+        this.userProcessContainer = userProcessContainer;
+        this.request = request;
+    }
+    
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, Order order, EcoSystem business) {
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.order = order;
+        this.system= business;
     }
 
     /**
@@ -38,6 +65,9 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         resultJTextField = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
+        btnUpload = new javax.swing.JButton();
+        picturelabel = new javax.swing.JLabel();
+        picture = new javax.swing.JLabel();
 
         submitJButton.setText("Submit Result");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -55,24 +85,37 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnUpload.setText("Upload");
+        btnUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploadActionPerformed(evt);
+            }
+        });
+
+        picture.setText("Picture");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(backJButton)
-                    .addComponent(jLabel1))
+                .addGap(67, 67, 67)
+                .addComponent(submitJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnUpload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(backJButton)
+                .addGap(27, 27, 27))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(resultJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                        .addComponent(submitJButton)
-                        .addGap(63, 63, 63))))
+                    .addComponent(jLabel1)
+                    .addComponent(picture))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(picturelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resultJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,11 +124,16 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(resultJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(picture)
+                    .addComponent(picturelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitJButton)
-                    .addComponent(backJButton))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(backJButton)
+                    .addComponent(btnUpload))
+                .addGap(63, 63, 63))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -97,17 +145,64 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         DeliveryManWorkAreaJPanel dwjp = (DeliveryManWorkAreaJPanel) component;
         dwjp.populateTable();
         
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
+        CardLayout CrdLyt = (CardLayout) userProcessContainer.getLayout();
+        CrdLyt.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
+       String status=resultJTextField.getText();
+        try {
+             if(status==null || status.isEmpty()){
+                throw new Exception(" Status field is Empty");
+             }       
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(null, " Status is Empty");
+            return;
+        }
        
+        order.setStatus(status);
+         for(Customer cust:system.getCustomerDirectory().getCustList()){
+            if(order.getCustomerName().equals(cust.getUserName())){
+                for(Order o : cust.getOrderList()){
+                    if(o.equals(order))
+                    {
+                        order.setStatus(status);
+                    }
+                    
+                }
+            }
+        }
+         resultJTextField.setText(" ");
+         userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_submitJButtonActionPerformed
+
+    private void btnUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();        
+        fileChooser.showOpenDialog(null);
+       
+        BufferedImage bfImage = null;
+        try {
+            File fileImage = fileChooser.getSelectedFile();
+            bfImage = ImageIO.read(new File(fileImage.getAbsolutePath()));
+        } catch (IOException ex) {
+        }
+        
+        Image pic = bfImage.getScaledInstance(picturelabel.getWidth(), picturelabel.getHeight(),Image.SCALE_SMOOTH);
+        ImageIcon Imicon = new ImageIcon(pic);
+        
+        picturelabel.setIcon(Imicon);
+        rest.setPicture(pic);
+    }//GEN-LAST:event_btnUploadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
+    private javax.swing.JButton btnUpload;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel picture;
+    private javax.swing.JLabel picturelabel;
     private javax.swing.JTextField resultJTextField;
     private javax.swing.JButton submitJButton;
     // End of variables declaration//GEN-END:variables
